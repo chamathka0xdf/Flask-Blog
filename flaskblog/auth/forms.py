@@ -1,9 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField , PasswordField , SubmitField , BooleanField , TextAreaField
-from flask_wtf.file import FileAllowed , FileField
-from wtforms.validators import DataRequired , Length  , Email  , EqualTo , ValidationError
+from flask_wtf.file import FileField, FileAllowed
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_login import current_user
 from flaskblog.models import User
+
+
+
 
 class RegisterForm(FlaskForm):
     username=StringField(
@@ -40,6 +43,10 @@ class RegisterForm(FlaskForm):
     def validate_email(self,email):
         if User.query.filter(User.email == email.data).first():
             raise ValidationError("This email is already registered")
+
+
+
+
 class LoginForm(FlaskForm):
     email=StringField(
         "Email",
@@ -55,6 +62,10 @@ class LoginForm(FlaskForm):
     )
     remember= BooleanField("Remember me")
     submit=SubmitField("Login")
+
+
+
+
 class updateForm(FlaskForm):
     profilepic=FileField(
         "Update Profile Picture",
@@ -84,21 +95,3 @@ class updateForm(FlaskForm):
         if email.data != current_user.email:
             if User.query.filter(User.email == email.data).first():
                 raise ValidationError("This email is already registered")
-
-
-
-class NewPost(FlaskForm):
-    title=StringField("Title",
-                      validators=[DataRequired()])
-    content=TextAreaField("Content",
-                     validators=[DataRequired(),
-                                 Length(max=2500)
-                                 ]
-                          )
-    submit=SubmitField("Post")
-
-
-
-
-
-# TODO : check this validaters using burp

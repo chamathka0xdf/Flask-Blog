@@ -5,11 +5,11 @@
       <img class="rounded-circle article-img" src="/img/{{post.author.image_file}}">
       <div class="media-body">
         <div class="article-metadata">
-          <a class="mr-2" href="{{ url_for('user_posts',id=post.author.id) }}">{{ post.author.username }}</a>
+          <a class="mr-2" href="{{ url_for('auth.user_posts',id=post.author.id) }}">{{ post.author.username }}</a>
           <small class="text-muted">{{ post.created_at.strftime("%Y-%m-%d %H:%M") }}</small><br>
             {% if post.author == current_user %}
             <div class="btn-group" role="group" aria-label="Basic example">
-                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('update_post', id=post.id) }}">Update</a>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('post.update_post', id=post.id) }}">Update</a>
                 <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
             </div>
             {% endif %}
@@ -34,7 +34,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <form action="{{ url_for('delete_post', id=post.id) }}" method="POST">
+        <form action="{{ url_for('post.delete_post', id=post.id) }}" method="POST">
           <input class="btn btn-danger" type="submit" value="Delete">
           </form>
       </div>

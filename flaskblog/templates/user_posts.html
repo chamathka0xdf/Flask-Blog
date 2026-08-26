@@ -7,11 +7,11 @@
       <img class="rounded-circle article-img" src="/img/{{post.author.image_file}}">
       <div class="media-body">
         <div class="article-metadata">
-          <a class="mr-2" href="{{ url_for('user_posts',id=post.author.id) }}">{{ post.author.username }}</a>
+          <a class="mr-2" href="{{ url_for('auth.user_posts',id=post.author.id) }}">{{ post.author.username }}</a>
 
           <small class="text-muted">{{ post.created_at.strftime("%Y-%m-%d %H:%M") }}</small>
         </div>
-        <h2><a class="article-title" href="{{ url_for('view_post',id=post.id) }}">{{ post.title }}</a></h2>
+        <h2><a class="article-title" href="{{ url_for('post.view_post',id=post.id) }}">{{ post.title }}</a></h2>
         <p class="article-content">{{ post.body }}</p>
       </div>
     </article>
@@ -20,9 +20,9 @@
 {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
     {% if page_num %}
         {% if posts.page == page_num %}
-            <a class="btn btn-info mb-4 " href="{{ url_for('user_posts',page=page_num,id=user.id) }}">{{ page_num }}</a>
+            <a class="btn btn-info mb-4 " href="{{ url_for('auth.user_posts',page=page_num,id=user.id) }}">{{ page_num }}</a>
         {% else %}
-          <a class="btn btn-outline-info mb-4" href="{{ url_for('user_posts',page=page_num,id=user.id) }}">{{ page_num }}</a>
+          <a class="btn btn-outline-info mb-4" href="{{ url_for('auth.user_posts',page=page_num,id=user.id) }}">{{ page_num }}</a>
         {%endif%}
     {%else%}
     ...

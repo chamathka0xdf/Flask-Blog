@@ -26,7 +26,13 @@ bcrypt=Bcrypt(app)
 
 login_manager=LoginManager()
 login_manager.init_app(app)
-login_manager.login_view='login'
+login_manager.login_view='auth.login'
 login_manager.login_message_category='info'
 
-from flaskblog import routes
+from flaskblog.auth.routes import auth
+from flaskblog.post.routes import post
+from flaskblog.main.routes import main
+
+app.register_blueprint(auth)
+app.register_blueprint(post)
+app.register_blueprint(main)
